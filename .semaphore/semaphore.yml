@@ -1,28 +1,13 @@
 version: v1.0
-name: Semaphore 2.0 documentation Project
+name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-
 blocks:
-  - name: "Check Changes"
+  - name: 'Block #1'
     task:
       jobs:
-        - name: List of changes
+        - name: 'Job #1'
           commands:
             - checkout
-            - git diff-tree --no-commit-id --name-only $SEMAPHORE_GIT_SHA
-
-  - name: "Execute on master"
-    task:
-      jobs:
-        - name: Deploy
-          commands:
-            - checkout
-            - gem install redcarpet
-            - if [ $SEMAPHORE_GIT_BRANCH == "master" ]; then ./deploy_docs.rb; fi
-
-      secrets:
-        - name: helpscout-docs
-
