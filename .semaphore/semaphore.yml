@@ -39,3 +39,6 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+promotions:
+  - name: Promotion 1
+    pipeline_file: pipeline_2.yml
