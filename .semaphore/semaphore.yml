@@ -5,7 +5,35 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: 'Block #1'
+  - name: Unit tests
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+        - name: 'Job #2'
+          commands:
+            - checkout
+    dependencies: []
+  - name: 'Block #2'
+    dependencies:
+      - Unit tests
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
+  - name: 'Block #3'
+    dependencies:
+      - 'Block #2'
+      - Unit tests
+    task:
+      jobs:
+        - name: Acceptance tests
+          commands:
+            - checkout
+  - name: 'Block #4'
+    dependencies:
+      - Unit tests
     task:
       jobs:
         - name: 'Job #1'
